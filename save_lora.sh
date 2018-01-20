@@ -8,7 +8,17 @@ then
   exit 1
 fi
 lasttimefile=`mktemp`
+set +e
 aws s3 cp "s3://$bucket/soracom/$1/lasttime" "$lasttimefile"
+if [ $? -ne 0 ]
+then
+  set -e
+  date +%s > "$lasttimefile"
+  aws s3 cp "$lasttimefile" "s3://$bucket/soracom/$1/lasttime"
+  rm "$lasttimefile"
+  exit 0
+fi
+set -e
 lasttime=`cat "$lasttimefile"`
 tmpfile=`mktemp`
 nowtime=`date +%s`
