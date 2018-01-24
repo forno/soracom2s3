@@ -22,7 +22,7 @@ lasttime=`cat "$lasttimefile"`
 tmpfile=`mktemp`
 nowtime=`date +%s%3N`
 set +e
-if ! soracom lora-devices get-data --device-id "$1" --coverage-type jp --from "$lasttime" --to "$nowtime" > "$tmpfile"
+if ! soracom lora-devices get-data --device-id "$1" --coverage-type jp --from "$lasttime" --to "$nowtime" --limit 200 > "$tmpfile"
 then
   set -e
   rm "$lasttimefile"
