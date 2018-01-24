@@ -12,7 +12,7 @@ set +e
 if ! aws s3 cp "s3://$bucket/soracom/$1/lasttime" "$lasttimefile"
 then
   set -e
-  date +%s > "$lasttimefile"
+  date +%s%3N > "$lasttimefile"
   aws s3 cp "$lasttimefile" "s3://$bucket/soracom/$1/lasttime"
   rm "$lasttimefile"
   exit 0
@@ -20,7 +20,7 @@ fi
 set -e
 lasttime=`cat "$lasttimefile"`
 tmpfile=`mktemp`
-nowtime=`date +%s`
+nowtime=`date +%s%3N`
 set +e
 if ! soracom lora-devices get-data --device-id "$1" --coverage-type jp --from "$lasttime" --to "$nowtime" > "$tmpfile"
 then
