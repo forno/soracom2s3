@@ -25,7 +25,7 @@ echo "id       : $1"
 echo "lasttime : $lasttime"
 echo "nowtime  : $nowtime"
 set +e
-if ! soracom lora-devices get-data --device-id "$1" --coverage-type jp --from "$lasttime" --to "$nowtime" --limit 200 > "$tmpfile"
+if ! soracom lora-devices get-data --device-id "$1" --coverage-type jp --from "$lasttime" --to "$nowtime" --limit 2000 > "$tmpfile"
 then
   set -e
   echo "failed!"
