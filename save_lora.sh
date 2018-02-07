@@ -21,16 +21,22 @@ set -e
 lasttime=`cat "$lasttimefile"`
 tmpfile=`mktemp`
 nowtime=`date +%s%3N`
+echo "id       : $1"
+echo "lasttime : $lasttime"
+echo "nowtime  : $nowtime"
 set +e
 if ! soracom lora-devices get-data --device-id "$1" --coverage-type jp --from "$lasttime" --to "$nowtime" --limit 200 > "$tmpfile"
 then
   set -e
+  echo "failed!"
   rm "$lasttimefile"
   rm "$tmpfile"
   exit 0
 fi
 set -e
-if [ -s "$tmpfile" ]
+content=`cat "$tmpfile"`
+echo "content  : $content"
+if [ -s "$tmpfile" -a '[]' != "$content" ]
 then
   echo "$nowtime" > "$lasttimefile"
   aws s3 cp "$tmpfile" "s3://$bucket/soracom/$1/$nowtime"
