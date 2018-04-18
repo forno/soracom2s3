@@ -8,7 +8,13 @@ I recommend this who don't need realtime data.
 
 ## Usage
 ### Mail Report
-#### Command reference
-`mail_report.sh <tag-name> <tag-value> <from-address> <to-addresses>`
+Mail report script.
 
-Example are `sh mail_report.sh collect-group kaikyokan doi@sozolab.jp doi@sozolab.jp doi.yusuke806@mail.kyutech.jp`
+#### Command reference
+`mail_report.sh <tag-name> <tag-value> <from-address> <to-addresses>...`
+
+### Register Tag
+Set tag to a device.
+
+#### Command reference
+`register_tag.sh <device-id> <tag-name> <tag-value>`
