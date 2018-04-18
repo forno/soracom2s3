@@ -19,4 +19,7 @@ To: $toaddresses
 Subject: Soracom data report
 
 `sh report.sh $tagname $tagvalue`
+
+0 mean: The device has no data on one day.
+1 mean: The device has data on one day.
 EOF
