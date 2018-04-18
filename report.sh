@@ -14,8 +14,8 @@ do
   data=`soracom lora-devices get-data --device-id="$x" --coverage-type=jp --from="$lasttime" --to="$nowtime" --limit=1`
   if [ "$data" = '[]' ]
   then
-    echo $x, No data
+    echo $x,0
   else
-    echo $x, Be exist
+    echo $x,1
   fi
 done
